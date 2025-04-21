@@ -15,6 +15,7 @@ const client = new Client({
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMembers,
   ],
 })
 
@@ -170,8 +171,22 @@ client.on('interactionCreate', async (interaction) => {
   }
 })
 
+// Role Check Function
+function hasRequiredRole(interaction, allowedRoles) {
+  const memberRoles = interaction.member.roles.cache.map((role) => role.name)
+  return allowedRoles.some((role) => memberRoles.includes(role))
+}
+
 // 🟦 Handle /embed
 async function handleEmbedCommand(interaction) {
+  const allowedRoles = ['Admin', 'Co Lead', 'Moderator']
+  if (!hasRequiredRole(interaction, allowedRoles)) {
+    return interaction.reply({
+      content: 'You do not have permission to use this command.',
+      flag: 1 << 6,
+    })
+  }
+
   const targetChannel = interaction.options.getChannel('channel')
   const title = interaction.options.getString('title')
   const description = interaction.options.getString('description')
@@ -207,6 +222,13 @@ async function handleEmbedCommand(interaction) {
 
 // 🟨 Handle /referee
 async function handleRefereeCommand(interaction) {
+  const allowedRoles = ['Admin', 'Co Lead', 'Moderator']
+  if (!hasRequiredRole(interaction, allowedRoles)) {
+    return interaction.reply({
+      content: 'You do not have permission to use this command.',
+      flag: 1 << 6,
+    })
+  }
   const spacing = '\u200b'.repeat(3)
   const targetChannel = interaction.options.getChannel('channel')
 
