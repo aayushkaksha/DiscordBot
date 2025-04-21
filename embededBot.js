@@ -152,6 +152,60 @@ client.once('ready', async () => {
     await rest.put(Routes.applicationCommands(client.user.id), {
       body: commands.map((command) => command.toJSON()),
     })
+
+    // Define allowed roles for each command
+    const embedCommandPermissions = [
+      {
+        id: '526997894348406789', // Admin
+        type: 'ROLE',
+        permission: true,
+      },
+      {
+        id: '1358083780832923708', // Co Lead
+        type: 'ROLE',
+        permission: true,
+      },
+      {
+        id: '1226863310461341746', // Moderator
+        type: 'ROLE',
+        permission: true,
+      },
+    ]
+
+    const refereeCommandPermissions = [
+      {
+        id: '526997894348406789', // Admin
+        type: 'ROLE',
+        permission: true,
+      },
+      {
+        id: '1358083780832923708', // Co Lead
+        type: 'ROLE',
+        permission: true,
+      },
+      {
+        id: '1226863310461341746', // Moderator
+        type: 'ROLE',
+        permission: true,
+      },
+    ]
+
+    // Register the commands and their role-based permissions
+    await rest.put(Routes.applicationCommands(client.user.id), {
+      body: [
+        {
+          ...commands[0].toJSON(),
+          default_permission: false, // Disable for everyone by default
+          permissions: embedCommandPermissions, // Only allow specified roles
+        },
+        {
+          ...commands[1].toJSON(),
+          default_permission: false, // Disable for everyone by default
+          permissions: refereeCommandPermissions, // Only allow specified roles
+        },
+      ],
+    })
+
     console.log('✅ Slash commands registered successfully!')
   } catch (error) {
     console.error('❌ Error registering commands:', error)
