@@ -190,7 +190,7 @@ async function handleEmbedCommand(interaction) {
     if (targetChannel) {
       await interaction.reply({
         content: `Sent to ${targetChannel}`,
-        ephemeral: true,
+        flag: 1 << 6,
       })
       await targetChannel.send({ embeds: [embed] })
     } else {
@@ -200,7 +200,7 @@ async function handleEmbedCommand(interaction) {
     console.error('Error sending embed:', err)
     await interaction.reply({
       content: 'Something went wrong.',
-      ephemeral: true,
+      flag: 1 << 6,
     })
   }
 }
@@ -266,7 +266,7 @@ async function handleRefereeCommand(interaction) {
     if (targetChannel) {
       await interaction.reply({
         content: `Sent to ${targetChannel}`,
-        ephemeral: true,
+        flag: 1 << 6,
       })
       await targetChannel.send({ embeds: [embed] })
     } else {
@@ -276,7 +276,7 @@ async function handleRefereeCommand(interaction) {
     console.error('Error sending referee embed:', err)
     await interaction.reply({
       content: 'Something went wrong.',
-      ephemeral: true,
+      flag: 1 << 6,
     })
   }
 }
