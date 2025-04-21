@@ -233,7 +233,7 @@ function hasRequiredRole(interaction, allowedRoles) {
 
 // 🟦 Handle /embed
 async function handleEmbedCommand(interaction) {
-  const allowedRoles = ['Admin', 'Co Lead', 'Moderator']
+  const allowedRoles = ['Admin', 'Co Lead', 'Moderator', 'Art&Cosplay Mod']
   if (!hasRequiredRole(interaction, allowedRoles)) {
     return interaction.reply({
       content: 'You do not have permission to use this command.',
@@ -276,7 +276,7 @@ async function handleEmbedCommand(interaction) {
 
 // 🟨 Handle /referee
 async function handleRefereeCommand(interaction) {
-  const allowedRoles = ['Admin', 'Co Lead', 'Moderator']
+  const allowedRoles = ['Admin', 'Co Lead', 'Moderator', 'Art&Cosplay Mod']
   if (!hasRequiredRole(interaction, allowedRoles)) {
     return interaction.reply({
       content: 'You do not have permission to use this command.',
