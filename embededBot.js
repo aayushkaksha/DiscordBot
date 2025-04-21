@@ -248,12 +248,12 @@ async function handleRefereeCommand(interaction) {
     ref1 || 'N/A'
   }\n\n`
   description += `${spacing} Match 4: (09:30)\n **Match 1 Winner(B)** vs **Match 2 Winner(B)**\n Ref Id: ${
-    ref2 || 'N/A'
+    ref3 || 'N/A'
   }\n\n`
 
   description += `${spacing} **FINALS**\n`
   description += `${spacing} Match 5: (10:00)\n **Group A Winner** vs **Group B Winner**\n Ref Id: ${
-    ref2 || 'N/A'
+    ref1 || 'N/A'
   }\n\n`
 
   const embed = new EmbedBuilder()
