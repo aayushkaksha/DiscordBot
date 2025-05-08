@@ -140,6 +140,28 @@ const commands = [
         .setDescription('Optional: Select a channel to send the message')
         .setRequired(false)
     ),
+
+  new SlashCommandBuilder()
+    .setName('art')
+    .setDescription('Announce the Monthly MLBB Art Competition')
+    .addStringOption((option) =>
+      option
+        .setName('submission_deadline')
+        .setDescription('Submission deadline (e.g., May 26 at 11:59 PM)')
+        .setRequired(true)
+    )
+    .addStringOption((option) =>
+      option
+        .setName('winner_announcement')
+        .setDescription('Winner announcement date (e.g., May 28)')
+        .setRequired(true)
+    )
+    .addChannelOption((option) =>
+      option
+        .setName('channel')
+        .setDescription('Optional: Select a channel to send the message')
+        .setRequired(false)
+    ),
 ]
 
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN)
@@ -153,7 +175,7 @@ client.once('ready', async () => {
       body: commands.map((command) => command.toJSON()),
     })
 
-    // Define allowed roles for each command
+    /*     // Define allowed roles for each command
     const embedCommandPermissions = [
       {
         id: '526997894348406789', // Admin
@@ -204,7 +226,7 @@ client.once('ready', async () => {
           permissions: refereeCommandPermissions, // Only allow specified roles
         },
       ],
-    })
+    }) */
 
     console.log('✅ Slash commands registered successfully!')
   } catch (error) {
@@ -222,6 +244,10 @@ client.on('interactionCreate', async (interaction) => {
 
   if (interaction.commandName === 'referee') {
     await handleRefereeCommand(interaction)
+  }
+
+  if (interaction.commandName === 'art') {
+    await handleArtCommand(interaction)
   }
 })
 
@@ -354,6 +380,94 @@ async function handleRefereeCommand(interaction) {
       content: 'Something went wrong.',
       flag: 1 << 6,
     })
+  }
+
+  // 🟥 Handle /art
+  async function handleArtCommand(interaction) {
+    const allowedRoles = ['Admin', 'Co Lead', 'Moderator', 'Art&Cosplay Mod']
+    if (!hasRequiredRole(interaction, allowedRoles)) {
+      return interaction.reply({
+        content: 'You do not have permission to use this command.',
+        flag: 1 << 6,
+      })
+    }
+
+    const spacing = '\u200b'.repeat(3)
+    const submissionDeadline = interaction.options.getString(
+      'submission_deadline'
+    )
+    const winnerAnnouncement = interaction.options.getString(
+      'winner_announcement'
+    )
+    const targetChannel = interaction.options.getChannel('channel')
+
+    const description = `${spacing}🎨 Welcome to the Monthly MLBB Art Competition – May Edition!  
+We’re excited to celebrate the creativity and passion of our Nepali MLBB community. Please review the official rules before participating:
+
+${spacing}**1.** All submissions must be inspired by **Mobile Legends: Bang Bang (MLBB)**.
+
+${spacing}**2.** Use of **AI-generated art is strictly prohibited**.
+
+${spacing}**3.** Your artwork must be created during **April or May**.  
+➤ To verify this, you must **click a photo of the image details page** from your gallery when you begin creating your art.
+
+${spacing}**4.** Participants must be **from Nepal**.
+
+${spacing}**5.** **Ownership proof is required.**  
+➤ Take a few **progress photos or short videos** while creating your artwork. Our team may ask for these during verification.
+
+---
+
+${spacing}**📤 How to Submit Your Art**  
+Submit your artwork in <#${
+      interaction.guild.channels.cache.find((c) => c.name === 'art-submission')
+        ?.id || 'art-submission'
+    }>.  
+Include the following details with your submission:  
+- Your **Name**  
+- Your **MLBB ID** (with Server ID)  
+
+After submission, a moderator will DM you for a quick verification process. Be ready with your **progress materials**.
+
+---
+
+${spacing}**🏆 May Prize Pool**  
+🥇 1st PRIZE: **4 Weekly Passes**  
+🥈 2nd PRIZE: **2 Weekly Passes**  
+🥉 3rd PRIZE: **1 Weekly Pass**  
+✨ Winners also receive a custom **“ARTIST”** role on our Discord server!
+
+---
+
+${spacing}**🗓️ Important Dates**  
+Submission Deadline: **${submissionDeadline}**  
+Winner Announcement: **${winnerAnnouncement}**
+
+${spacing}Let’s keep it original, fun, and full of creativity. Good luck and happy creating! ✨`
+
+    const embed = new EmbedBuilder()
+      .setTitle('*MLBB Art Competition – May Edition*')
+      .setDescription(description)
+      .setColor('#FF7A99')
+      .setTimestamp()
+
+    try {
+      if (targetChannel) {
+        await interaction.reply({
+          content: `Sent to ${targetChannel}`,
+          flag: 1 << 6,
+        })
+        await targetChannel.send({ embeds: [embed] })
+      } else {
+        await interaction.reply({ embeds: [embed] })
+      }
+    } catch (err) {
+      console.error('Error sending art competition embed:', err)
+      await interaction.reply({
+        content: 'Something went wrong.',
+        flag: 1 << 6,
+      })
+    }
   }
 }
 
