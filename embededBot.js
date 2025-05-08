@@ -367,7 +367,7 @@ ${spacing}**2.** Use of **AI-generated content and image enhancements are strict
 
 ${spacing}**3.** Your artwork must be created during **${eligibleMonths}**.  
 
-${spacing}**5.** **You must be the original creator of your submission.**  
+${spacing}**4.** **You must be the original creator of your submission.**  
 
 ---
 
