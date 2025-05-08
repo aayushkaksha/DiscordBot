@@ -381,27 +381,28 @@ async function handleRefereeCommand(interaction) {
       flag: 1 << 6,
     })
   }
+}
 
-  // 🟥 Handle /art
-  async function handleArtCommand(interaction) {
-    const allowedRoles = ['Admin', 'Co Lead', 'Moderator', 'Art&Cosplay Mod']
-    if (!hasRequiredRole(interaction, allowedRoles)) {
-      return interaction.reply({
-        content: 'You do not have permission to use this command.',
-        flag: 1 << 6,
-      })
-    }
+// 🟥 Handle /art
+async function handleArtCommand(interaction) {
+  const allowedRoles = ['Admin', 'Co Lead', 'Moderator', 'Art&Cosplay Mod']
+  if (!hasRequiredRole(interaction, allowedRoles)) {
+    return interaction.reply({
+      content: 'You do not have permission to use this command.',
+      flag: 1 << 6,
+    })
+  }
 
-    const spacing = '\u200b'.repeat(3)
-    const submissionDeadline = interaction.options.getString(
-      'submission_deadline'
-    )
-    const winnerAnnouncement = interaction.options.getString(
-      'winner_announcement'
-    )
-    const targetChannel = interaction.options.getChannel('channel')
+  const spacing = '\u200b'.repeat(3)
+  const submissionDeadline = interaction.options.getString(
+    'submission_deadline'
+  )
+  const winnerAnnouncement = interaction.options.getString(
+    'winner_announcement'
+  )
+  const targetChannel = interaction.options.getChannel('channel')
 
-    const description = `${spacing}🎨 Welcome to the Monthly MLBB Art Competition – May Edition!  
+  const description = `${spacing}🎨 Welcome to the Monthly MLBB Art Competition – May Edition!  
 We’re excited to celebrate the creativity and passion of our Nepali MLBB community. Please review the official rules before participating:
 
 ${spacing}**1.** All submissions must be inspired by **Mobile Legends: Bang Bang (MLBB)**.
@@ -420,9 +421,9 @@ ${spacing}**5.** **Ownership proof is required.**
 
 ${spacing}**📤 How to Submit Your Art**  
 Submit your artwork in <#${
-      interaction.guild.channels.cache.find((c) => c.name === 'art-submission')
-        ?.id || 'art-submission'
-    }>.  
+    interaction.guild.channels.cache.find((c) => c.name === 'art-submission༘⋆✿')
+      ?.id || 'art-submission༘⋆✿'
+  }>.  
 Include the following details with your submission:  
 - Your **Name**  
 - Your **MLBB ID** (with Server ID)  
@@ -433,8 +434,8 @@ After submission, a moderator will DM you for a quick verification process. Be r
 
 ${spacing}**🏆 May Prize Pool**  
 🥇 1st PRIZE: **4 Weekly Passes**  
-🥈 2nd PRIZE: **2 Weekly Passes**  
-🥉 3rd PRIZE: **1 Weekly Pass**  
+🥈 2nd PRIZE: **3 Weekly Passes**  
+🥉 3rd PRIZE: **2 Weekly Pass**  
 ✨ Winners also receive a custom **“ARTIST”** role on our Discord server!
 
 ---
@@ -445,29 +446,28 @@ Winner Announcement: **${winnerAnnouncement}**
 
 ${spacing}Let’s keep it original, fun, and full of creativity. Good luck and happy creating! ✨`
 
-    const embed = new EmbedBuilder()
-      .setTitle('*MLBB Art Competition – May Edition*')
-      .setDescription(description)
-      .setColor('#FF7A99')
-      .setTimestamp()
+  const embed = new EmbedBuilder()
+    .setTitle('*MLBB Art Competition – May Edition*')
+    .setDescription(description)
+    .setColor('#FF7A99')
+    .setTimestamp()
 
-    try {
-      if (targetChannel) {
-        await interaction.reply({
-          content: `Sent to ${targetChannel}`,
-          flag: 1 << 6,
-        })
-        await targetChannel.send({ embeds: [embed] })
-      } else {
-        await interaction.reply({ embeds: [embed] })
-      }
-    } catch (err) {
-      console.error('Error sending art competition embed:', err)
+  try {
+    if (targetChannel) {
       await interaction.reply({
-        content: 'Something went wrong.',
+        content: `Sent to ${targetChannel}`,
         flag: 1 << 6,
       })
+      await targetChannel.send({ embeds: [embed] })
+    } else {
+      await interaction.reply({ embeds: [embed] })
     }
+  } catch (err) {
+    console.error('Error sending art competition embed:', err)
+    await interaction.reply({
+      content: 'Something went wrong.',
+      flag: 1 << 6,
+    })
   }
 }
 
