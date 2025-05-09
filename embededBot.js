@@ -371,7 +371,7 @@ ${spacing}**3.** Your artwork must be created during **${eligibleMonths}**.
 
 ${spacing}**4.** **You must be the original creator of your submission.**  
 
-${spacing}**5.** **You must be from Nepal**  
+${spacing}**5.** **Participants must be Nepalese**  
 
 ---
 
