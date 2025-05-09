@@ -359,7 +359,7 @@ async function handleArtCommand(interaction) {
   const targetChannel = interaction.options.getChannel('channel')
 
   const description = `${spacing}🎨 Welcome to the Monthly MLBB Art Competition – **${edition} Edition**!  
-We’re excited to celebrate the creativity and passion of our Nepali MLBB community. Please review the official rules before participating:
+We’re excited to celebrate the creativity and passion of our Nepali MLBB community. Please review the official **Rules** before participating:
 
 ${spacing}**1.** All submissions must be inspired by **Mobile Legends: Bang Bang (MLBB)**.
 
@@ -368,6 +368,8 @@ ${spacing}**2.** Use of **AI-generated content and image enhancements are strict
 ${spacing}**3.** Your artwork must be created during **${eligibleMonths}**.  
 
 ${spacing}**4.** **You must be the original creator of your submission.**  
+
+${spacing}**5.** **You must be from Nepal**  
 
 ---
 
@@ -380,10 +382,10 @@ Include the following details with your submission:
 - Your **Name**  
 - Your **MLBB ID** (with Server ID)  
 
-${spacing}**How to Verify your Art**
+${spacing}**How to  Verify your Art**
 After submission, a moderator will DM you for a quick verification process. Be ready with your **progress materials**.
-➤ To verify this, you must **click a photo of the image details page** from your gallery of when you began creating your art.
-➤ Take a few **progress photos or short videos** while creating your artwork. Our team may ask for these during verification.
+➤ image details ( date / time when it was captured) 
+➤ progress photos or a short video
 
 ---
 
@@ -397,9 +399,7 @@ ${spacing}**🏆 Prize Pool**
 
 ${spacing}**🗓️ Important Dates**  
 Submission Deadline: **${submissionDeadline}**  
-Winner Announcement: **${winnerAnnouncement}**
-
-${spacing}Let’s keep it original, fun, and full of creativity. Good luck and happy creating! ✨`
+Winner Announcement: **${winnerAnnouncement}**`
 
   const embed = new EmbedBuilder()
     .setTitle(`*Monthly MLBB Art Competition – ${edition} Edition*`)
