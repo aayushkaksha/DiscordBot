@@ -358,7 +358,7 @@ async function handleArtCommand(interaction) {
   const eligibleMonths = interaction.options.getString('eligible_months')
   const targetChannel = interaction.options.getChannel('channel')
 
-  const description = `${spacing}🎨 Welcome to the Monthly MLBB Art Competition – **${edition} Edition**!  
+  const description = `${spacing}🎨 Welcome to the MLBB Monthly Art Competition – **${edition} Edition**!  
 We’re excited to celebrate the creativity and passion of our Nepali MLBB community. 
 
 **RULES** 
