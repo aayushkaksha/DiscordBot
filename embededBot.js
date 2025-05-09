@@ -359,7 +359,9 @@ async function handleArtCommand(interaction) {
   const targetChannel = interaction.options.getChannel('channel')
 
   const description = `${spacing}🎨 Welcome to the Monthly MLBB Art Competition – **${edition} Edition**!  
-We’re excited to celebrate the creativity and passion of our Nepali MLBB community. Please review the official **Rules** before participating:
+We’re excited to celebrate the creativity and passion of our Nepali MLBB community. 
+
+**RULES** 
 
 ${spacing}**1.** All submissions must be inspired by **Mobile Legends: Bang Bang (MLBB)**.
 
@@ -375,8 +377,8 @@ ${spacing}**5.** **You must be from Nepal**
 
 ${spacing}**📤 How to Submit Your Art**  
 Submit your artwork in <#${
-    interaction.guild.channels.cache.find((c) => c.name === 'art-submission')
-      ?.id || 'art-submission'
+    interaction.guild.channels.cache.find((c) => c.name === 'art-submission༘⋆✿')
+      ?.id || 'art-submission༘⋆✿'
   }>.  
 Include the following details with your submission:  
 - Your **Name**  
@@ -402,7 +404,7 @@ Submission Deadline: **${submissionDeadline}**
 Winner Announcement: **${winnerAnnouncement}**`
 
   const embed = new EmbedBuilder()
-    .setTitle(`*Monthly MLBB Art Competition – ${edition} Edition*`)
+    .setTitle(`*MLBB Monthly Art Competition – ${edition} Edition*`)
     .setDescription(description)
     .setColor('#FF7A99')
     .setTimestamp()
