@@ -392,7 +392,7 @@ After submission, a moderator will DM you for a quick verification process. Be r
 ---
 
 ${spacing}**🏆 Prize Pool**  
-🥇 1st PRIZE: **3 Weekly Passes**  
+🥇 1st PRIZE: **4 Weekly Passes**  
 🥈 2nd PRIZE: **2 Weekly Passes**  
 🥉 3rd PRIZE: **1 Weekly Pass**  
 ✨ Winners also receive a custom **“ARTIST”** role on our Discord server!
